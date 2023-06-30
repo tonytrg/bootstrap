@@ -11,6 +11,8 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/tonytrg/backend/internal/api"
 )
 
 func main() {
@@ -32,6 +34,7 @@ func main() {
 func runServer(ctx context.Context, addr string) error {
 	server := &http.Server{
 		Addr:              addr,
+		Handler:           api.ApiHandler(),
 		ReadTimeout:       time.Second * 5,
 		WriteTimeout:      time.Second * 5,
 		ReadHeaderTimeout: time.Second * 5,
